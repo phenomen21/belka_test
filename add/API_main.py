@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[87]:
-
-
 import numpy as np
 import json
 import pickle
@@ -14,39 +8,28 @@ from flask_restful import Resource, Api, reqparse
 import pandas as pd
 import ast
 
-
-# In[88]:
-
-
 with open('col_transf.pkl','br') as ct:
     col_transf = pickle.load(ct)
 with open('xgb.pkl','rb') as xg:
     xgb_trained = pickle.load(xg)
 
-
-# In[90]:
-
-
-import json
-#  подаю следующие поля:
+#  fields as follows:
 '''
-rooms        - кол-во комнат (5 означет 5 и более)
-area_tot     - общая площадь
-area_kitchen - площадь кухни
-floor        - этаж
-floor_tot    - кол-во этажей
-district     - район ('ленинский':0, 'орджоникидзевский':1, 'правобережный':2)
-'''
+rooms        - No of rooms in the apartment (5 means 5 and more)
+area_tot     - total area
+area_kitchen - kitchen area
+floor        - floor (story) where the desired apartment is located on
+floor_tot    - total No of floors (stories) in the building
+district     - desired district ('ленинский':0, 'орджоникидзевский':1, 'правобережный':2)
+
+fields as dict
 dict1 = {'rooms':1,
          'area_tot':31,
          'area_kitchen':7,
          'floor':5,
          'floor_tot':7,
          'district':0}
-
-
-# In[91]:
-
+'''
 
 class Predict(Resource):
     def xgb_predict(self, input_dict):
@@ -57,6 +40,7 @@ class Predict(Resource):
                      input_dict['floor'],
                      input_dict['floor_tot'],
                      input_dict['district']]
+#     process input
         input_processed = col_transf.transform(np.array(input_arr).reshape(1,-1))
         output_dict = input_dict.copy()
         output_dict['price'] = int(round(xgb_trained.predict(input_processed).item(),0))
@@ -81,24 +65,11 @@ class Predict(Resource):
             status = 400
         return output, status  # return data and status
 
-
-# In[92]:
-
-
 app = Flask(__name__)
 api = Api(app)
 api.add_resource(Predict, '/predict')  # '/predict' is our entry point
 
-
-# In[93]:
-
-
 if __name__ == '__main__':
     app.run()  # run our Flask app
-
-
-# In[ ]:
-
-
 
 
