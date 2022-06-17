@@ -3,6 +3,3 @@ pandas
 sklearn
 xgboost
 flask
-flask_restful
-pickle
-
