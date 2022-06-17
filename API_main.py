@@ -8,9 +8,9 @@ from flask_restful import Resource, Api, reqparse
 import pandas as pd
 import ast
 
-with open('add/col_transf.pkl','br') as ct:
+with open('col_transf.pkl','br') as ct:
     col_transf = pickle.load(ct)
-with open('add/xgb.pkl','rb') as xg:
+with open('xgb.pkl','rb') as xg:
     xgb_trained = pickle.load(xg)
 
 #  fields as follows:
