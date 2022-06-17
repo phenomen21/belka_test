@@ -1,3 +1,4 @@
 /EDA/*
-README.md
 .git
+.cache
+*.md
