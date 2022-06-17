@@ -10,9 +10,9 @@ The task was as follows:
 I used Flask-restful to build the RESTful API
 
 Files:
-* /add/EDA_Belka.ipynb - EDA and building of the ML model
-* /add/CityStarExport.xls - Excel document containing the main data from the www.citystar.ru website (downloaded Jun 7 2022)
-* /add/Magn_streets.xlsx - Excel documents (3 sheets) with "street" - "district" mapping (composed from data downloaded from youkarta.ru/cheljabinskaja-obl/magnitogorsk-74/)
+* /EDA/EDA_Belka.ipynb - EDA and building of the ML model
+* /EDA/CityStarExport.xls - Excel document containing the main data from the www.citystar.ru website (downloaded Jun 7 2022)
+* /EDA/Magn_streets.xlsx - Excel documents (3 sheets) with "street" - "district" mapping (composed from data downloaded from youkarta.ru/cheljabinskaja-obl/magnitogorsk-74/)
 * API_main.py - API code
 * col_transf.pkl - Pickle serialized saved sklearn.compose.ColumnTransformer object for one-hot encoding
 * xgb.pkl - Pickle serialized trained XGBoost model for prediction
