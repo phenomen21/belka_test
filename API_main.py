@@ -1,12 +1,9 @@
-import numpy as np
 import json
 import pickle
 from sklearn.compose import ColumnTransformer
 import xgboost as xgb
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
-import pandas as pd
-import ast
 
 with open('col_transf.pkl','br') as ct:
     col_transf = pickle.load(ct)
