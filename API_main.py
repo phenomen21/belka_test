@@ -46,6 +46,7 @@ class Predict(Resource):
         return output_dict
     
     def get(self):
+        print('start')
         parser = reqparse.RequestParser()  # initialize
         parser.add_argument('rooms', required=True, location='args', type=int,dest='rooms')  # add args
         parser.add_argument('area_tot', required=True, type=float, dest='area_tot')
@@ -53,8 +54,9 @@ class Predict(Resource):
         parser.add_argument('floor', required=True, type=int, dest='floor')
         parser.add_argument('floor_tot', required=True, type=int, dest='floor_tot')
         parser.add_argument('district', required=True, type=int, dest='district')
-        
+        print('parser ready')
         args = dict(parser.parse_args())  # parse arguments to dictionary
+        print('dict', args)
         try:
             output = self.xgb_predict(args)
             status = 200
