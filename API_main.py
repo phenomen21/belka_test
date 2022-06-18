@@ -8,7 +8,7 @@ from flask_restful import Resource, Api, reqparse
 with open('col_transf.pkl','br') as ct:
     col_transf = pickle.load(ct)
 
-xgb_trained = Booster()
+xgb_trained = xgb.Booster()
 xgb_trained.load_model('xgb_trained')
 
 #  fields as follows:
