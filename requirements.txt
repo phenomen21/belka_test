@@ -1,3 +1,5 @@
+numpy
+scipy
 sklearn
 xgboost==1.5.2
 flask==1.1.2
