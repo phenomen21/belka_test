@@ -1,4 +1,4 @@
-import json
+import os
 import pickle
 from sklearn.compose import ColumnTransformer
 import xgboost as xgb
@@ -68,6 +68,6 @@ api = Api(app)
 api.add_resource(Predict, '/predict')  # '/predict' is our entry point
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 
 
