@@ -31,22 +31,18 @@ dict1 = {'rooms':1,
 
 class Predict(Resource):
     def xgb_predict(self, input_dict):
-#         input_dict = json.loads(input_json)
         input_arr = [input_dict['rooms'], 
                      input_dict['area_tot'],
                      input_dict['area_kitchen'],
                      input_dict['floor'],
                      input_dict['floor_tot'],
                      input_dict['district']]
-#     process input
         input_processed = col_transf.transform(np.array(input_arr).reshape(1,-1))
         output_dict = input_dict.copy()
-        output_dict['price'] = int(round(xgb_trained.predict(input_processed).item(),0))
-#         output_json = json.dumps(output_dict)
+        output_dict['price'] = int(round(xgb_trained.predict(xgb.DMatrix(input_processed)).item(),0))
         return output_dict
     
     def get(self):
-        print('start')
         parser = reqparse.RequestParser()  # initialize
         parser.add_argument('rooms', required=True, location='args', type=int,dest='rooms')  # add args
         parser.add_argument('area_tot', required=True, type=float, dest='area_tot')
@@ -54,14 +50,12 @@ class Predict(Resource):
         parser.add_argument('floor', required=True, type=int, dest='floor')
         parser.add_argument('floor_tot', required=True, type=int, dest='floor_tot')
         parser.add_argument('district', required=True, type=int, dest='district')
-        print('parser ready')
         args = dict(parser.parse_args())  # parse arguments to dictionary
-        print('dict', args)
         try:
             output = self.xgb_predict(args)
             status = 200
         except ValueError:
-            output = {'data':'Bad request'}
+            output = {'data':'Bad request: ValueError'}
             status = 400
         return output, status  # return data and status
 
