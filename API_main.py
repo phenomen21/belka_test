@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 from sklearn.compose import ColumnTransformer
 import xgboost as xgb
-from flask import Flask, jsonify
+from flask import Flask, make_response
 from flask_restful import Resource, Api, reqparse
 
 with open('col_transf.pkl','br') as ct:
@@ -56,14 +56,11 @@ class Predict(Resource):
             out_data = self.xgb_predict(args)
             status = 200
         except ValueError:
-            out_data = {'data':'Bad request: Value Error'}
+            out_data = 'Bad request: Value Error'
             status = 400
-        
-        output = {
-            'Message': out_data,
-            'Status Code': status
-        }
-        return jsonify(output)  # return data and status
+            
+        output = make_response({"data":out_data}, status)
+        return output  # return data and status
 
 app = Flask(__name__)
 api = Api(app)
