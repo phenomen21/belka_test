@@ -43,6 +43,7 @@ class Predict(Resource):
         return output_dict
     
     def get(self):
+        print('start')
         parser = reqparse.RequestParser()  # initialize
         parser.add_argument('rooms', required=True, location='args', type=int,dest='rooms')  # add args
         parser.add_argument('area_tot', required=True, type=float, dest='area_tot')
