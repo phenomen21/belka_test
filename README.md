@@ -10,11 +10,12 @@ The task was as follows:
 I used Flask-restful to build the RESTful API
 
 Files:
-* /EDA/EDA_Belka.ipynb - EDA and building of the ML model
+* /EDA/EDA_Belka_RUS.ipynb - EDA and building of the ML model (in Russian)
+* /EDA/EDA_Belka_ENG.ipynb - EDA and building of the ML model (in English)
 * /EDA/CityStarExport.xls - Excel document containing the main data from the www.citystar.ru website (downloaded Jun 7 2022)
 * /EDA/Magn_streets.xlsx - Excel documents (3 sheets) with "street" - "district" mapping (composed from data downloaded from https://youkarta.ru/cheljabinskaja-obl/magnitogorsk-74/)
 * API_main.py - API code
 * col_transf.pkl - Pickle serialized saved sklearn.compose.ColumnTransformer object for one-hot encoding
-* xgb.pkl - Pickle serialized trained XGBoost model for prediction
+* xgb_trained - trained XGBoost model for prediction (saved with xgb.save_model)
 
-Model requires numpy, pandas, flask, XGBoost and sklearn packages installed
+Model requires numpy, pandas, flask, flask_restful, XGBoost and sklearn packages installed
